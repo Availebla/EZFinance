@@ -1,0 +1,26 @@
+{
+  "name": "ezfinance",
+  "version": "1.0.0",
+  "description": "ezfinance group project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Availebla/EZFinance.git"
+  },
+  "author": "Mathew Pius",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Availebla/EZFinance/issues"
+  },
+  "homepage": "https://github.com/Availebla/EZFinance#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-openid-connect": "^2.7.1",
+    "mysql": "^2.18.1"
+  }
+}
