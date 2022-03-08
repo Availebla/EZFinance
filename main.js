@@ -30,12 +30,12 @@ app.get('/profile', requiresAuth(), (request, response) => {
 });
 
 // define a GET API with path "/home"
-app.get("/home", requiresAuth(), (request, response) => {
+app.get("/home", (request, response) => {
     response.send("Welcome to EZ Finance App!");
 });
 
 // define an API to return all the users
-app.get("/users/all", requiresAuth(), (request, response) => {
+app.get("/users/all", (request, response) => {
     connection.query("select * from user", (errors, results) => {
         if (errors) {
             console.log(errors);
@@ -47,7 +47,7 @@ app.get("/users/all", requiresAuth(), (request, response) => {
 });
 
 //define an API to get user by user id
-app.get("/users/by-uid", requiresAuth(), (request, response) => {
+app.get("/users/by-uid", (request, response) => {
     connection.query(    `select * from user where user_id = ${request.query.uid}`,
     (errors, results) => {
       if (errors) {
