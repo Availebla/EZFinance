@@ -96,7 +96,7 @@ app.post("/users/add", (request, response) => {
   });
 
   //define an API to get wallet DETAILS by uid
-app.get("/wallet/balance", (request, response) => {
+app.get("/wallet", (request, response) => {
   connection.query(
     `select * from wallet where user_id = ${request.query.uid}`,
     (errors, results) => {
