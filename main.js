@@ -80,6 +80,22 @@ app.post("/users/add", (request, response) => {
     );
   });
 
+//define an API to update wallet total balance
+  app.post("/wallet/balance/add", (request, response) => {
+    connection.query(
+      `update wallet set balance = "${request.body.deposit}" where user_id = ${request.body.uid}`,
+      (errors, results) => {
+        if (errors) {
+          console.log(errors);
+          response.status(500).send("Something went wrong...");
+        } else {
+          response.status(200).send("Wallet balance updated!");
+        }
+      }
+    );
+  });
+
+
 //to start the server at port 3000
 const port = process.env.PORT || 3000;
 app.listen(port, (errors) => { 
