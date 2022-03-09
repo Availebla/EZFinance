@@ -66,7 +66,7 @@ app.get("/users/by-uid", (request, response) => {
 
 // define an POST API to add a new user to database.
 // User's information is passed request's body section.
-app.post("/users/add", requiresAuth(), (request, response) => {
+app.post("/users/add", (request, response) => {
     connection.query(
       `insert into user (first_name, last_name, email) values ("${request.body.fname}", "${request.body.lname}", "${request.body.email}")`,
       (errors, results) => {
