@@ -104,7 +104,7 @@ app.get("/wallet/balance", (request, response) => {
         console.log(errors);
         response.status(500).send("Something went wrong...");
       } else {
-        response.status(200).send("Here's your balance!");
+        response.status(200).send(results);
       }
     }
   );
