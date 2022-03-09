@@ -95,6 +95,21 @@ app.post("/users/add", (request, response) => {
     );
   });
 
+  //define an API to get wallet DETAILS by uid
+app.get("/wallet/balance", (request, response) => {
+  connection.query(
+    `select * from wallet where user_id = ${request.query.uid}`,
+    (errors, results) => {
+      if (errors) {
+        console.log(errors);
+        response.status(500).send("Something went wrong...");
+      } else {
+        response.status(200).send(results);
+      }
+    }
+  );
+});
+
 //define an API to get wallet balance by uid
 app.get("/wallet/balance", (request, response) => {
   connection.query(
@@ -110,6 +125,18 @@ app.get("/wallet/balance", (request, response) => {
   );
 });
 
+//define an API to get transactions by uid
+app.get("/transactions/by-uid", (request, response) => {
+  connection.query(`select * from transactions where user_id = ${request.query.uid}`, 
+  (errors, results) => {
+    if (errors) {
+      console.log(errors);
+      response.status(500).send("Something went wrong...");
+    } else {
+      response.status(200).send(results);
+    }
+  });
+});
 
 //to start the server at port 3000
 const port = process.env.PORT || 3000;
@@ -120,3 +147,6 @@ app.listen(port, (errors) => {
         console.log(`Server started on port ${port}`)
     }
 });
+
+
+
