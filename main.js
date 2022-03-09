@@ -98,7 +98,7 @@ app.post("/users/add", (request, response) => {
 //define an API to get wallet balance by uid
 app.get("/wallet/balance", (request, response) => {
   connection.query(
-    `select * from wallet where user_id = ${request.query.uid}`,
+    `select balance from wallet where user_id = ${request.query.uid}`,
     (errors, results) => {
       if (errors) {
         console.log(errors);
