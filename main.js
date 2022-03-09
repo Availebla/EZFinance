@@ -95,6 +95,21 @@ app.post("/users/add", (request, response) => {
     );
   });
 
+//define an API to get wallet balance by uid
+app.get("/wallet/balance", (request, response) => {
+  connection.query(
+    `select * from wallet where user_id = ${request.query.uid}`,
+    (errors, results) => {
+      if (errors) {
+        console.log(errors);
+        response.status(500).send("Something went wrong...");
+      } else {
+        response.status(200).send("Here's your balance!");
+      }
+    }
+  );
+});
+
 
 //to start the server at port 3000
 const port = process.env.PORT || 3000;
