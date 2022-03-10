@@ -95,6 +95,22 @@ app.post("/users/add", (request, response) => {
     );
   });
 
+  //define an API to update wallet total balance
+  app.post("/wallet/balance/minus", (request, response) => {
+    connection.query(
+      `update wallet set wallet.balance = wallet.balance - "${request.body.withdraw}" where user_id = ${request.body.uid}`,
+      (errors, results) => {
+        if (errors) {
+          console.log(errors);
+          response.status(500).send("Something went wrong...");
+        } else {
+          response.status(200).send("Wallet balance updated!");
+        }
+      }
+    );
+  });
+
+
   //define an API to get wallet DETAILS by uid
 app.get("/wallet", (request, response) => {
   connection.query(
@@ -151,7 +167,7 @@ app.get("/transactions/by-uid", (request, response) => {
   });
 });
 
-//Define API to add transaction into transaction details
+//Define POST API to add transaction into transaction details
 app.post("/transactions/add", (request, response) => {
   connection.query(
     `insert into transactions (user_id, transaction_date, transaction_type, amount) 
@@ -167,6 +183,8 @@ app.post("/transactions/add", (request, response) => {
     }
   );
 });
+
+
 
 
 //to start the server at port 3000
