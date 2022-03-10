@@ -138,6 +138,37 @@ app.get("/transactions/by-uid", (request, response) => {
   });
 });
 
+//define an API to get transactions by uid
+app.get("/transactions/by-uid", (request, response) => {
+  connection.query(`select * from transactions where user_id = ${request.query.uid}`, 
+  (errors, results) => {
+    if (errors) {
+      console.log(errors);
+      response.status(500).send("Something went wrong...");
+    } else {
+      response.status(200).send(results);
+    }
+  });
+});
+
+//Define API to add transaction into transaction details
+app.post("/transactions/add", (request, response) => {
+  connection.query(
+    `insert into transactions ( transaction_date, transaction_type,amount) 
+     values ("${request.body.transaction_date}", "${request.body.transaction_type}", "${request.body.amount}"  
+     where user_id = ${request.query.uid}`,                 
+    (errors, results) => {
+      if (errors) {
+        console.log(errors);
+        response.status(500).send("Something went wrong...");
+      } else {
+        response.status(200).send(results);
+      }
+    }
+  );
+});
+
+
 //to start the server at port 3000
 const port = process.env.PORT || 3000;
 app.listen(port, (errors) => { 
@@ -149,4 +180,34 @@ app.listen(port, (errors) => {
 });
 
 
+// ////test///
 
+// router.post('/transact', function(req, res, next) {
+//   console.log('transact working');
+//   var amount = req.body.amount;
+//   var card = req.body.card;
+//   var action = req.body.action;
+//   console.log(amount+' '+card+' '+action);
+//     if(action=='DEPOSIT'){
+//       var newAmount = (parseInt(amount) + parseInt(userdata.money)).toString();
+//       var deposit = User.updateOne(
+//       { 'card' : card },
+//       { $set: { 'money' : newAmount } }
+//       );
+//       deposit.exec(function (err, result) {
+//       if (err) return handleError(err);
+//         console.log(result);
+//       });
+//     };
+//     if(action=='WITHDRAW'){
+//       var newAmount = parseInt(userdata.money) - parseInt(amount);
+//       if(newAmount<0){res.redirect('/member'); return;}
+//       var withdraw = User.updateOne(
+//       { 'card' : card },
+//       { $set: { 'money' : newAmount } }
+//       );
+//       withdraw.exec(function (err, result) {
+//       if (err) return handleError(err);
+//         console.log(result);
+//       });
+//     }
