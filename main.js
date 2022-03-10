@@ -154,9 +154,9 @@ app.get("/transactions/by-uid", (request, response) => {
 //Define API to add transaction into transaction details
 app.post("/transactions/add", (request, response) => {
   connection.query(
-    `insert into transactions ( transaction_date, transaction_type,amount) 
-     values ("${request.body.transaction_date}", "${request.body.transaction_type}", "${request.body.amount}"  
-     where user_id = ${request.query.uid}`,                 
+    `insert into transactions (user_id, transaction_date, transaction_type, amount) 
+     values (${request.body.uid}", ${request.body.transaction_date}", "${request.body.transaction_type}", "${request.body.amount}"  
+     where user_id = ${request.body.uid}`,                 
     (errors, results) => {
       if (errors) {
         console.log(errors);
