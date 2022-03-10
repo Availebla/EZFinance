@@ -155,8 +155,8 @@ app.get("/transactions/by-uid", (request, response) => {
 app.post("/transactions/add", (request, response) => {
   connection.query(
     `insert into transactions (user_id, transaction_date, transaction_type, amount) 
-     values (${request.body.uid}", ${request.body.transaction_date}", "${request.body.transaction_type}", "${request.body.amount}"  
-     where user_id = ${request.body.uid}`,                 
+     values (${request.body.user_id}", ${request.body.transaction_date}", "${request.body.transaction_type}", "${request.body.amount}"  
+     where user_id = ${request.body.user_id}`,                 
     (errors, results) => {
       if (errors) {
         console.log(errors);
